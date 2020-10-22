@@ -41,12 +41,12 @@ class Suit(Clothes):
         return round((2 * self.suit_height) + 0.3, 2)
 
 
-m1 = Coat(45)
-print(m1.title)
-print(m1.coat_size)
-print(m1.calculate_size)
-m2 = Suit(40)
-print(m2.title)
-print(m2.suit_height)
-print(m2.calculate_size)
+coat = Coat(45)
+print(coat.title)
+print(coat.coat_size)
+print(coat.calculate_size)
+suit = Suit(40)
+print(suit.title)
+print(suit.suit_height)
+print(suit.calculate_size)
 

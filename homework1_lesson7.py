@@ -10,26 +10,34 @@
 """
 
 
+# Реализуем описание класса Martix
 class Matrix:
     def __init__(self, matrix):
         self.matrix = matrix
 
-    def __str__(self):
+    def __str__(self):  # Реализуем перегурзку метода для вывода матрицы
         print_string = ""
         for i in self.matrix:
             print_string += "".join(str(i).strip("[]")) + "\n"
         return f"{print_string}"
 
-    def __add__(self, other):
-        self.new_matrix = [[] for i in range(len(self.matrix))]
-        for i in range(len(self.matrix)):
-            for j in range(len(self.matrix[0])):
-                self.new_matrix[i].append(self.matrix[i][j] + other.matrix[i][j])
-        return self.new_matrix
+    def __add__(self, other):  # Реализуем перегрузку метода для реализации операции сложения
+        self.new_matrix = [[] for i in range(len(self.matrix))]  # Новыя матрица в результате сложения двух
+        # Проверяем, что количество строк в матрице одинаковое
+        if len(self.matrix) == len(other.matrix):
+            # Проверяем, что количество элементов в строке матрицы одинаковое
+            if 0 == sum([len(i) + len(c) for i, c in list(zip(self.matrix, other.matrix))]) % len(self.matrix[0]):
+                # Выполняем сложение двух матриц и возвращаем новую
+                for i in range(len(self.matrix)):
+                    for j in range(len(self.matrix[0])):
+                        self.new_matrix[i].append(self.matrix[i][j] + other.matrix[i][j])
+                return self.new_matrix
+            else:
+                return "Матрицы не равны"
+        else:
+            return "Матрицы не равны"
 
 
-m1 = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-m2 = Matrix([[5, 7, 8], [11, 12, 5], [6, 45, 0]])
-
-new_matrix = m1 + m2
-print(new_matrix)
+matrix1 = Matrix([[1, 2, 3], [4, 5, 6], [6, 45, 0]])
+matrix2 = Matrix([[5, 7, 8], [11, 12, 5], [1, 100, 17]])
+print(f"Результат сложения матриц: {matrix1 + matrix2}")

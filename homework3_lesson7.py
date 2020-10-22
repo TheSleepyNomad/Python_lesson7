@@ -32,14 +32,22 @@ class Cell:
         return f"Количество клеток: {self.cell_count}"
 
     def __add__(self, other):
-        return self.cell_count + other.cell_count
+        new_cell = Cell(self.cell_count + other.cell_count)
+        return new_cell
+
     def __sub__(self, other):
-        return self.cell_count - other.cell_count if self.cell_count - other.cell_count > 0 else "разность меньше нуля"
+        new_cell = Cell(self.cell_count - other.cell_count)
+        return new_cell if self.cell_count - other.cell_count > 0 else "разность меньше нуля"
+
     def __mul__(self, other):
-        return self.cell_count * other.cell_count
+        new_cell = Cell(self.cell_count * other.cell_count)
+        return new_cell
+
     def __truediv__(self, other):
-        return round(self.cell_count / other.cell_count)
-    def make_order(self,count_cells_row):
+        new_cell = Cell(self.cell_count // other.cell_count)
+        return new_cell
+
+    def make_order(self, count_cells_row):
         self.cell_count -= count_cells_row
         print_cell = []
         while self.cell_count >= 0:
@@ -51,13 +59,18 @@ class Cell:
                 break
         return "".join(print_cell)
 
-
-
-
-cell = Cell(15)
-cell1 = Cell(10)
-
-print(cell)
-print(cell1)
-print(cell.make_order(5))
-
+# Проверяем создание клеток
+cell_1 = Cell(10)
+cell_2 = Cell(15)
+print(cell_1, cell_2)
+# Проверяем сложение, вычитание, умножение и деление
+print(cell_1 + cell_2)
+# Выводится: разность больше нуля
+print(cell_1 - cell_2)
+cell_1.cell_count = 20
+print(cell_1 - cell_2)
+print(cell_1 * cell_2)
+print(cell_1 / cell_2)
+# Проверяем make_order
+new_cell = cell_1 * cell_2
+print(new_cell.make_order(13))
